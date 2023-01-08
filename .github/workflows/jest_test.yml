@@ -12,20 +12,19 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
+  steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Latest Node.js Version
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: latest
         cache: 'npm'
-    - run: >
+    - name: Create apiKeys.js file
+      run: >
         echo "module.exports = { GUARDIAN_API_KEY: '' };" >> apiKeys.js
-    - run: npm ci
-    - run: npm run test
-    - run: npm run buildOnce
+    - name: Install node packages
+      run: npm ci
+    - name: Run tests
+      run: npm run test
+    - name: Build the page
+      run: npm run buildOnce
