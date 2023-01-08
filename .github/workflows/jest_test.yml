@@ -25,7 +25,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: >
-      echo "module.exports = { GUARDIAN_API_KEY: '' };"
+        echo "module.exports = { GUARDIAN_API_KEY: '' };"
     - run: npm ci
     - run: npm run test
     - run: npm run buildOnce
