@@ -12,16 +12,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: 18.x
-
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js Latest Version
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: latest
         cache: 'npm'
     - run: >
         echo "module.exports = { GUARDIAN_API_KEY: '' };" >> apiKeys.js
