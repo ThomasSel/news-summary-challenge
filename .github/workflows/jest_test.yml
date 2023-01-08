@@ -8,7 +8,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test_pull_request:
 
     runs-on: ubuntu-latest
 
@@ -19,8 +19,12 @@ jobs:
       with:
         node-version: latest
         cache: 'npm'
-    - run: >
+    - name: Create an apiKeys.js file
+      run: >
         echo "module.exports = { GUARDIAN_API_KEY: '' };" >> apiKeys.js
-    - run: npm ci
-    - run: npm run test
-    - run: npm run buildOnce
+    - name: Install node packages
+      run: npm ci
+    - name: Run tests
+      run: npm run test
+    - name: Run page build
+      run: npm run buildOnce
